@@ -3,8 +3,71 @@ import matrix.*
 
 describe "test de matrix " {
 
-  test "test 01" {
-    assert.equals(100, 50+50)
+  test "La vitalidad inicial de neo es de 10" {
+    assert.equals(10, neo.vitalidad())
   }
 
+  test "Si neo salta, su energia es de 50 y la vitalidad es de 5" {
+    neo.saltar()
+    assert.equals(50, neo.energia())
+    assert.equals(5, neo.vitalidad())
+  }
+
+  test "Neo es el unico elegido, Morfeo y Trinity no lo son" {
+    assert.that(neo.esElElegido())
+    assert.notThat(morfeo.esElElegido())
+    assert.notThat(trinity.esElElegido())
+  }
+
+  test "La vitalidad inicial de morfeo es 8" {
+    assert.equals(8, morfeo.vitalidad())
+  }
+
+  test "Si Morfeo salta, su vitalidad disminuye en 1 y queda cansado" {
+    morfeo.saltar()
+    assert.equals(7, morfeo.vitalidad())
+    assert.notThat(morfeo.estaDescansado())
+  }
+
+  test "Neo, el elegido, esta arriba de la nave" {
+    assert.that(nave.estaElElegido())
+  }
+
+  test "Neo decide bajarse de la nave y ya no esta abordo" {
+    neo.bajarDeLaNave()
+    assert.notThat(nave.estaElElegido())
+  }
+
+  test "Todos los pasajeros deciden bajar de la nave y no queda nadie abordo" {
+    neo.bajarDeLaNave()
+    morfeo.bajarDeLaNave()
+    trinity.bajarDeLaNave()
+    assert.that(nave.cuantosPasajerosHay() == 0)
+  }
+
+  test "Los pasajeros de la nave son 3" {
+    assert.equals(3, nave.cuantosPasajerosHay())
+  }
+
+  test "El pasajero de mayor vitalidad es Neo" {
+    assert.equals(neo, nave.pasajeroDeMayorVitalidad())
+  }
+
+  test "La nave no esta equilibrada en vitalidad" {
+    assert.notThat(nave.estaEquilibradaEnVitalidad())
+  }
+
+  test "La nave choca, todos saltan y se van de la nave, Neo queda con 50 de energia, Morfeo queda con 7 de vitalidad y cansado " {
+    nave.chocar()
+    assert.that(nave.cuantosPasajerosHay() == 0)
+    assert.equals(50, neo.energia())
+    assert.equals(7, morfeo.vitalidad())
+    assert.notThat(morfeo.estaDescansado())
+  }
+
+  test "La nave acelera y saltan todos menos el elegido" {
+    nave.acelerar()
+    assert.equals(100, neo.energia())
+    assert.equals(7, morfeo.vitalidad())
+  }
 }

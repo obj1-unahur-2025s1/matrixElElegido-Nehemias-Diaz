@@ -19,6 +19,8 @@ object neo {
   method bajarDeLaNave() {
     nave.bajarDeLaNaveA(self)
   }
+
+  method energia() = energia
 }
 
 object morfeo {
@@ -33,6 +35,8 @@ object morfeo {
   method vitalidad() = vitalidad
   
   method esElElegido() = false
+
+  method estaDescansado() = descansado
   
   method subirALaNave() {
     nave.subirALaNaveA(self)
