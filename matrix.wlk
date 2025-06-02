@@ -1,5 +1,8 @@
+import nave.*
+
+
 object neo {
-  var energia = 0
+  var energia = 100
   
   method saltar() {
     energia /= 2
@@ -19,7 +22,7 @@ object neo {
 }
 
 object morfeo {
-  var vitalidad = 0
+  var vitalidad = 8
   var descansado = true
   
   method saltar() {
@@ -56,29 +59,4 @@ object trinity {
   method bajarDeLaNave() {
     nave.bajarDeLaNaveA(self)
   }
-}
-
-object nave {
-  const pasajeros = [neo, morfeo, trinity]
-  
-  method bajarDeLaNaveA(unPasajero) {
-    pasajeros.remove(unPasajero)
-  }
-  
-  method subirALaNaveA(unPasajero) {
-    pasajeros.add(unPasajero)
-  }
-  
-  method cuantosPasajerosHay() = pasajeros.size()
-  
-  method pasajeroDeMayorVitalidad() = pasajeros.max({ p => p.vitalidad() })
-  
-  method estaEquilibradaEnVitalidad() {
-    const vitalidades = pasajeros.map({ p => p.vitalidad() })
-    const minVitalidad = vitalidades.min()
-    const maxVitalidad = vitalidades.max()
-    return (maxVitalidad <= (minVitalidad * 2))
-  }
-  
-  method estaElElegido() = pasajeros.any({ p => p.esElElegido() })
 }
